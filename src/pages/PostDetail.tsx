@@ -3,11 +3,11 @@ import { ArrowLeft } from 'lucide-react';
 import { motion } from 'motion/react';
 import { PageTransition } from '../components/PageTransition';
 import { MarkdownContent } from '../components/MarkdownContent';
-import { posts } from '../data/posts';
+import { getPosts } from '../data/posts';
 
 export function PostDetail() {
   const { id } = useParams();
-  
+  const posts = getPosts();
   const post = posts.find(p => p.id === id);
 
   if (!post) {

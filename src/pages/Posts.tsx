@@ -1,13 +1,18 @@
 import { Link } from 'react-router-dom';
 import { Search } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { PageTransition } from '../components/PageTransition';
-import { posts } from '../data/posts';
+import { getPosts } from '../data/posts';
 
 export function Posts() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState<string>('All');
+  const [posts, setPosts] = useState(getPosts());
+
+  useEffect(() => {
+    setPosts(getPosts());
+  }, []);
 
   const getTypeColor = (type: string) => {
     switch (type) {

@@ -4,9 +4,11 @@ import imgLogoDark from "figma:asset/aa98122115bd3f14e471d39ea331f0adb4fdbce7.pn
 import imgLogoLight from "figma:asset/b387002487940ca9d562d7e26ac5d0c95b887990.png";
 import { PageTransition } from '../components/PageTransition';
 import { useEffect, useState } from 'react';
+import { getLandingStats } from '../data/landingStats';
 
 export function Home() {
   const [isDark, setIsDark] = useState(true);
+  const [stats, setStats] = useState(getLandingStats());
 
   useEffect(() => {
     // Check current theme
@@ -26,11 +28,16 @@ export function Home() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    // Reload stats when component mounts
+    setStats(getLandingStats());
+  }, []);
+
   const proofData = [
-    { label: 'CTFs Played', value: '47' },
-    { label: 'Hackathons', value: '12' },
-    { label: 'Projects Built', value: '23' },
-    { label: 'Research Logs', value: '156' },
+    { label: 'CTFs Played', value: stats.ctfsPlayed },
+    { label: 'Hackathons', value: stats.hackathons },
+    { label: 'Projects Built', value: stats.projectsBuilt },
+    { label: 'Research Logs', value: stats.researchLogs },
   ];
 
   const domains = [
@@ -54,7 +61,7 @@ export function Home() {
         {/* Hero Section */}
         <section className="min-h-screen flex flex-col items-center justify-center relative px-4 sm:px-6 lg:px-8 py-20">
           <motion.div 
-            className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8"
+            className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 lg:gap-10 mb-6 sm:mb-8"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -62,9 +69,9 @@ export function Home() {
             <img 
               src={isDark ? imgLogoDark : imgLogoLight}
               alt="HackerTroupe" 
-              className="h-[100px] w-[100px] sm:h-[120px] sm:w-[120px] lg:h-[160px] lg:w-[160px] object-contain"
+              className="h-[100px] w-[100px] sm:h-[120px] sm:w-[120px] lg:h-[160px] lg:w-[160px] object-contain sm:mb-3"
             />
-            <h1 className="brand-font text-[48px] sm:text-[56px] lg:text-[72px] leading-none text-[var(--accent)] tracking-tight text-center sm:text-left uppercase">
+            <h1 className="brand-font text-[48px] sm:text-[56px] lg:text-[72px] leading-none text-[var(--accent)] tracking-tight text-center sm:text-left uppercase sm:mt-5">
               HACKER<br />TROUPE
             </h1>
           </motion.div>

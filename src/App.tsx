@@ -9,21 +9,43 @@ import { Members } from './pages/Members';
 import { Operations } from './pages/Operations';
 import { Posts } from './pages/Posts';
 import { PostDetail } from './pages/PostDetail';
+import { AdminLogin } from './pages/AdminLogin';
+import { AdminDashboard } from './pages/AdminDashboard';
+import { AdminMembers } from './pages/AdminMembers';
+import { AdminOperations } from './pages/AdminOperations';
+import { AdminPosts } from './pages/AdminPosts';
+import { AdminLanding } from './pages/AdminLanding';
 
-function AppContent() {
+interface AppContentProps {
+  isDark: boolean;
+  toggleTheme: () => void;
+}
+
+function AppContent({ isDark, toggleTheme }: AppContentProps) {
   const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
   
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/members" element={<Members />} />
-        <Route path="/operations" element={<Operations />} />
-        <Route path="/posts" element={<Posts />} />
-        <Route path="/posts/:id" element={<PostDetail />} />
-      </Routes>
-    </AnimatePresence>
+    <>
+      {!isAdminRoute && <Navigation isDark={isDark} toggleTheme={toggleTheme} />}
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/members" element={<Members />} />
+          <Route path="/operations" element={<Operations />} />
+          <Route path="/posts" element={<Posts />} />
+          <Route path="/posts/:id" element={<PostDetail />} />
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/members" element={<AdminMembers />} />
+          <Route path="/admin/operations" element={<AdminOperations />} />
+          <Route path="/admin/posts" element={<AdminPosts />} />
+          <Route path="/admin/landing" element={<AdminLanding />} />
+        </Routes>
+      </AnimatePresence>
+      {!isAdminRoute && <Footer />}
+    </>
   );
 }
 
@@ -55,9 +77,7 @@ export default function App() {
   return (
     <Router>
       <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors">
-        <Navigation isDark={isDark} toggleTheme={toggleTheme} />
-        <AppContent />
-        <Footer />
+        <AppContent isDark={isDark} toggleTheme={toggleTheme} />
       </div>
     </Router>
   );

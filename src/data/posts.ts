@@ -848,3 +848,46 @@ Captured 234 unique malware samples:
 - Publish weekly threat reports`,
   },
 ];
+
+const POSTS_STORAGE_KEY = 'hackertroupe_posts';
+
+export const getPosts = (): Post[] => {
+  if (typeof window === 'undefined') return posts;
+  
+  const stored = localStorage.getItem(POSTS_STORAGE_KEY);
+  if (stored) {
+    try {
+      return JSON.parse(stored);
+    } catch (e) {
+      console.error('Failed to parse posts from localStorage', e);
+    }
+  }
+  
+  localStorage.setItem(POSTS_STORAGE_KEY, JSON.stringify(posts));
+  return posts;
+};
+
+export const savePosts = (newPosts: Post[]): void => {
+  localStorage.setItem(POSTS_STORAGE_KEY, JSON.stringify(newPosts));
+};
+
+export const addPost = (post: Post): void => {
+  const currentPosts = getPosts();
+  currentPosts.unshift(post); // Add to beginning
+  savePosts(currentPosts);
+};
+
+export const updatePost = (id: string, updatedPost: Post): void => {
+  const currentPosts = getPosts();
+  const index = currentPosts.findIndex(p => p.id === id);
+  if (index !== -1) {
+    currentPosts[index] = updatedPost;
+    savePosts(currentPosts);
+  }
+};
+
+export const deletePost = (id: string): void => {
+  const currentPosts = getPosts();
+  const filtered = currentPosts.filter(p => p.id !== id);
+  savePosts(filtered);
+};
