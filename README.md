@@ -1,7 +1,7 @@
 
   # HackerTroupe Website Design
 
-  This is a code bundle for HackerTroupe Website Design. The original project is available at https://www.figma.com/design/kA8kH1rflgrBRTDOMdYsuL/HackerTroupe-Website-Design.
+  This is a code bundle for HackerTroupe Website Design. You can view the live template at: https://www/hackertroupe.figma.site
 
   ## Running the code
 
