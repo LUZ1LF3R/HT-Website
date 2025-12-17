@@ -1,0 +1,107 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Rajdhani:wght@700&family=Teko:wght@700&display=swap');
+
+@layer theme {
+  :root {
+    /* Light Mode Colors */
+    --bg-primary: #F6F6F6;
+    --bg-secondary: #FFFFFF;
+    --text-primary: #0B0B0B;
+    --text-secondary: #6B6B6B;
+    --accent: #00E5FF;
+    --divider: #BEBEBE;
+    
+    /* Common */
+    --cyber-cyan: #00E5FF;
+    --deep-black: #0B0B0B;
+    --off-white: #F6F6F6;
+    --muted-gray: #9A9A9A;
+    --divider-gray: #2A2A2A;
+  }
+
+  .dark {
+    /* Dark Mode Colors */
+    --bg-primary: #0B0B0B;
+    --bg-secondary: #111111;
+    --text-primary: #F6F6F6;
+    --text-secondary: #9A9A9A;
+    --accent: #00E5FF;
+    --divider: #2A2A2A;
+  }
+}
+
+@layer base {
+  @font-face {
+    font-family: 'Mokoto';
+    src: url('https://fonts.cdnfonts.com/s/96931/Mokoto-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    font-weight: 400;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--accent);
+  }
+  
+  /* Brand font for HackerTroupe with fallbacks */
+  .brand-font {
+    font-family: 'Mokoto', 'Teko', 'Rajdhani', 'Impact', 'Arial Black', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+}
